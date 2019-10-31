@@ -41,7 +41,7 @@ export const signup = async (request, response) => {
         email: newUser.email,
         firstName: newUser.firstName,
         lastName: newUser.lastName,
-        availableBalance: newUser.availableBalance,
+        availableBalance: `NGN ${newUser.availableBalance}`,
         token
       }
     });

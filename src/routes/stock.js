@@ -2,7 +2,7 @@ import express from 'express';
 import * as StockControllers from '../controllers/stock';
 
 const stock = express.Router();
-const STOCK_URL = '/stock';
+const STOCK_URL = '/stocks';
 
 const { viewAvailableStock } = StockControllers;
 

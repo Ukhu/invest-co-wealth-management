@@ -2,7 +2,8 @@ export default (Sequelize, DataTypes) => {
   const Stock = Sequelize.define('Stock', {
     tradingCode: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      primaryKey: true
     },
     companyName: {
       allowNull: false,
@@ -19,7 +20,11 @@ export default (Sequelize, DataTypes) => {
     }
   }, {});
 
-  Stock.associate = () => {
+  Stock.associate = (models) => {
+    Stock.hasMany(models.Portfolio, {
+      foreignKey: 'tradingCode',
+      onDelete: 'CASCADE'
+    });
   };
   return Stock;
 };

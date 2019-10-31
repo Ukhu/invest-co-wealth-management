@@ -14,6 +14,10 @@ servers:
 tags:
   - name: Auth
     description: Authentication routes
+  - name: Stock
+    description: Stocks routes
+  - name: Portfolio
+    description: Portfolio routes
 
 security:
 - ApiKeyAuth: []
@@ -94,6 +98,122 @@ paths:
                   error:
                     type: string
                     example: a user with the given email already exists
+        500:
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+                    example: error occured!
+  /stocks/available:
+    get:
+      tags:
+        - Stock
+      summary: Gets all available stock options
+      description: Gets the available stock options from the database
+      responses:
+        200:
+          description: request successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: successfully returned available stocks
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        tradingCode:
+                          type: string
+                        companyName:
+                          type: string
+                        unitPrice:
+                          type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+                    example: invalid token
+        500:
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+                    example: error occured!
+  /portfolio:
+    get:
+      tags:
+        - Portfolio
+      summary: Gets the users current stocks
+      description: Gets the users current stocks in their portfolio
+      responses:
+        200:
+          description: request successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: successfully returned current stocks in your portfolio
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                        tradingCode:
+                          type: string
+                        numberOfUnits:
+                          type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+        404:
+          description: request successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: there are currently no stocks in your portfolio
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  error:
+                    type: string
+                    example: invalid token
         500:
           description: internal server error
           content:
