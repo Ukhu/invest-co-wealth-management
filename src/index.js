@@ -6,6 +6,7 @@ import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import debug from 'debug';
+import routes from './routes';
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to InvestCo Wealth and Asset Management');
 });
+
+app.use(routes);
 
 // setup swagger documentation
 const documentation = YAML.load(path.join(__dirname, '../docs/swagger.yaml'));
