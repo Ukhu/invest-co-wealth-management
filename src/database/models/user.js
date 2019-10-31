@@ -23,7 +23,11 @@ export default (Sequelize, DataTypes) => {
     }
   }, {});
 
-  User.associate = () => {
+  User.associate = (models) => {
+    User.hasMany(models.Portfolio, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
+    });
   };
   return User;
 };

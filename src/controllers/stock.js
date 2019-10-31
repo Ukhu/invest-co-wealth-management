@@ -16,7 +16,7 @@ const {
 export const viewAvailableStock = async (request, response) => {
   try {
     const availableStock = await getAvailableStockOptions();
-    if (!availableStock) {
+    if (availableStock.length < 1) {
       return response.status(404).json({
         message: 'no available stock options',
       });
