@@ -31,7 +31,7 @@ export const signup = async (request, response) => {
       lastName,
       email,
       password: hashedPassword,
-      availableBalance: 50000
+      availableBalance: 500000
     });
     const token = jwt.sign({ id: newUser.id }, process.env.SECRET_KEY, { expiresIn: '24h' });
     response.status(201).json({
