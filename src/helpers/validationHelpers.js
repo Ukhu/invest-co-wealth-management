@@ -47,3 +47,23 @@ export const checkPassword = () => genericCheck('password')
   .withMessage('password must be at least 8 characters, and maximum 15')
   .isAlphanumeric()
   .withMessage('password must be alphanumeric');
+
+/**
+ * @method checkVolume
+ * @description validates the input for the volume field
+ * @returns {function} call to the genericCheck validator
+ */
+export const checkNumber = () => genericCheck('volume')
+  .isInt({ min: 1, allow_leading_zeroes: false })
+  .withMessage('volume must be a number and be minimum 1');
+
+/**
+ * @method checkTradingCode
+ * @description validates the input for tradingCode field
+ * @returns {function} call to the genericCheck validator
+ */
+export const checkTradingCode = () => genericCheck('tradingCode')
+  .isAlpha()
+  .withMessage('tradingCode must be made up of alphabets')
+  .isLength({ min: 2, max: 3 })
+  .withMessage('invalid tradingCode, must be a minimum of 2 and maximum 3 characters');
